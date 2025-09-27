@@ -2,12 +2,19 @@ import express from 'express'
 import cors from 'cors'
 import {OpenAI} from 'openai'
 import dotenv from 'dotenv'
+import connectDB from './db/db.js'
+import authRoutes from './routes/authroutes.js'
+
 
 
 dotenv.config();
 const app=express();
 app.use(express.json());
+connectDB()
+
+
 app.use(cors());
+
 
 
 
@@ -16,6 +23,8 @@ const port=5000;
 app.get('/',(req,res)=>{
     res.send("You are on home page");
 })
+
+app.use("/api/auth",authRoutes)
 
 
 
